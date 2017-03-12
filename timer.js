@@ -1,34 +1,37 @@
 var Timer = (function() {
 	var self = this;
-	self.timeLeft = 0;
 	self.silence = false;
-	self.self.stopped = true;
+	self.stopped = true;
 	self.beepSound = getBeep();
 	self.timeout;
+	self.data = {
+		time: 0
+	};
 
 	function startTimer(durationPhrase) {
 		self.silence = false;
 		self.stopped = false;
-		self.timeLeft = parseTimeInSeconds(durationPhrase);
+
+		self.data.time = parseTimeInSeconds(durationPhrase);
 
 		setNextTimerTimeout();
 	}
 
 	function setNextTimerTimeout() {
 		self.timeout = setTimeout(function () {
-			self.timeLeft--;
-			if (self.timeLeft > 0 && self.stopped === false) {
+			self.data.time--;
+			if (self.data.time > 0 && self.stopped === false) {
 				setNextTimerTimeout();
 			}
-			else if (self.timeLeft == 0) {
+			else if (self.data.time == 0) {
 				setNextBeepTimeout();
 			}
 		}, 1000);
 	}
 
 	function setNextBeepTimeout() {
+		beep();
 		self.timeout = setTimeout(function () {
-			beep();
 			if (self.silence === false && self.stopped === false) {
 				setNextBeepTimeout();
 			}
@@ -72,9 +75,6 @@ var Timer = (function() {
 		start: startTimer,
 		stop: stopTimer,
 		silence: silenceTimer,
-		timeLeft: self.timeLeft,
-		getTimeLeft: function () {
-			return self.timeLeft;
-		}
+		data: self.data
 	};;
 })();

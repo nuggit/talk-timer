@@ -1,7 +1,7 @@
 if (annyang) {
 	var commands = {
 		'(set) timer (for) *duration': function(duration) {
-			console.log("setting timer for " + duration)
+			console.log("setting timer for " + duration);
 			Timer.start(duration);
 		},
 		'stop timer': function () {
@@ -19,14 +19,15 @@ if (annyang) {
 	annyang.start();
 }
 
+
+
 var app = new Vue({
 	el: '#timer',
 	data: {
-		timer: Timer
-	},
-	computed: {
-		timeLeft: function() {
-			return Timer.getTimeLeft();
-		}
+		timerInfo: Timer.data
 	}
 });
+
+function test() {
+	Timer.start('5 seconds');
+}
