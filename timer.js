@@ -9,9 +9,9 @@ var Timer = (function() {
 	};
 
 	function startTimer(durationPhrase) {
-		self.silence = false;
-		self.stopped = false;
+		stopTimer();
 
+		self.stopped = false;
 		self.data.time = parseTimeInSeconds(durationPhrase);
 
 		setNextTimerTimeout();
@@ -59,10 +59,6 @@ var Timer = (function() {
 	function beep() {
 		if (self.silence === false) {
 			self.beepSound.play();
-			console.log("BEEP");
-		}
-		else {
-			console.log("(silenced beep)")
 		}
 	}
 
