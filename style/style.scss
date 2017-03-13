@@ -1,0 +1,46 @@
+$inactive-color: #888;
+$active-color: #000;
+$timesup-color: #e00;
+
+
+body {
+	width: 100%;
+}
+
+.timer {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 15vw;
+	text-align: center;
+	visibility: hidden; // this becomes visible when vue stuff gets bound. avoid literally showing "{{ timeLeft }}"
+
+	&.stopped {
+		color: $inactive-color;
+	}
+	&.started {
+		color: $active-color;
+	}
+	&.beeping {
+		color: $timesup-color;
+	}
+	&.beeping.silenced:after {
+		content: '\01F507';
+		font-size: 8vw;
+	}
+}
+
+
+// http://stackoverflow.com/a/16012979/873550
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

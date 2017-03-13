@@ -3,12 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:700" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
 	<title>Talk Timer</title>
 </head>
 <body>
 
-	<div id="timer">
-		{{ timeLeft }}
+	<div id="timerDisplay">
+		<div class="timer" v-bind:class="timerStyles"
+			 v-bind:style="{ visibility: 'visible'}">{{ timeLeft }}</div>
 	</div>
 
 	<button onclick="test()">Test</button>

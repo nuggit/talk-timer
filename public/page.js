@@ -18,13 +18,22 @@ String.prototype.toHHMMSS = function () {
 }
 
 var timerVm = new Vue({
-	el: '#timer',
+	el: '#timerDisplay',
 	data: {
 		timerInfo: Timer.data
 	},
 	computed: {
 		timeLeft: function () {
 			return Timer.data.time.toString().toHHMMSS();
+		},
+		timerStyles: function () {
+			return {
+				started: !Timer.data.stopped,
+				stopped: Timer.data.stopped,
+				beeping: Timer.data.time <= 0 && !Timer.data.stopped,
+				blink: Timer.data.time <= 0 && !Timer.data.stopped,
+				silence: Timer.data.silence
+			};
 		}
 	}
 });

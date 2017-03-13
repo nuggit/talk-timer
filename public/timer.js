@@ -1,17 +1,17 @@
 var Timer = (function() {
 	var self = this;
-	self.silence = false;
-	self.stopped = true;
 	self.beepSound = getBeep();
 	self.timeout;
 	self.data = {
-		time: 0
+		time: 0,
+		silence: false,
+		stopped: true
 	};
 
 	function startTimer(durationPhrase) {
 		stopTimer();
 
-		self.stopped = false;
+		self.data.stopped = false;
 		self.data.time = parseTimeInSeconds(durationPhrase);
 
 		setNextTimerTimeout();
@@ -20,7 +20,7 @@ var Timer = (function() {
 	function setNextTimerTimeout() {
 		self.timeout = setTimeout(function () {
 			self.data.time--;
-			if (self.data.time > 0 && self.stopped === false) {
+			if (self.data.time > 0 && self.data.stopped === false) {
 				setNextTimerTimeout();
 			}
 			else if (self.data.time == 0) {
@@ -32,21 +32,22 @@ var Timer = (function() {
 	function setNextBeepTimeout() {
 		beep();
 		self.timeout = setTimeout(function () {
-			if (self.silence === false && self.stopped === false) {
+			self.data.time--;
+			if (self.data.silence === false && self.data.stopped === false) {
 				setNextBeepTimeout();
 			}
 		}, 1000);
 	}
 
 	function stopTimer() {
-		self.timeLeft = 0;
-		self.silence = false;
-		self.stopped = true;
+		self.data.silence = false;
+		self.data.stopped = true;
+		self.data.time = 0;
 		clearTimeout(self.timeout);
 	}
 
 	function silenceTimer() {
-		self.silence = true;
+		self.data.silence = true;
 	}
 
 	function parseTimeInSeconds(phrase) {
@@ -57,7 +58,7 @@ var Timer = (function() {
 	}
 
 	function beep() {
-		if (self.silence === false) {
+		if (self.data.silence === false) {
 			self.beepSound.play();
 		}
 	}
