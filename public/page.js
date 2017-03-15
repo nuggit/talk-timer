@@ -38,10 +38,6 @@ var timerVm = new Vue({
 	}
 });
 
-function test() {
-	Timer.start('3 minutes');
-}
-
 if (annyang) {
 	var commands = {
 		'(set) timer (for) *duration': function(duration) {
@@ -58,8 +54,15 @@ if (annyang) {
 		}
 	};
 
+	annyang.debug();
+
 	annyang.addCommands(commands);
 
+	annyang.addCallback('error', function(err) {
+		console.log('Annyang error', err);
+	});
+
 	annyang.start();
+	console.log("Listening");
 }
 

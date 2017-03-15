@@ -12,7 +12,7 @@ describe("Timer", function () {
 	});
 
 	describe("When parsing time phrases", function () {
-		it("should parse 5 seconds", function () { testParse("5 seconds", 5); });
+		it("should parse 1 second", function () { testParse("1 second", 1); });
 		it("should parse 30 seconds", function () { testParse("30 seconds", 30); });
 		it("should parse 0 seconds", function () { testParse("0 seconds", 0); });
 		it("should parse 1 minute", function () { testParse("1 minute", 60); });
@@ -21,6 +21,10 @@ describe("Timer", function () {
 		it("should parse 1 hour", function () { testParse("1 hour", 3600); });
 		it("should parse 2 hours", function () { testParse("2 hours", 7200); });
 		it("should not parse gibberish", function () { testParse("gibberish", 0); });
+		it("should not parse fifteen minutes", function () { testParse("fifteen minutes", 0); });
+		it("should not parse 1 second lemme check", function () { testParse("1 second lemme check", 0); });
+		it("should not parse 5 days", function () { testParse("5 days", 0); });
+		it("should not parse 1second", function () { testParse("1second", 0); });
 	});
 
 	describe("When timer is inactive", function () {

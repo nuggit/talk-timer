@@ -51,10 +51,32 @@ var Timer = (function() {
 	}
 
 	function parseTimeInSeconds(phrase) {
-		if (phrase == '3 minutes') {
-			return 3 * 60;
+		var words = phrase.split(" ");
+		if (words.length !== 2) {
+			return 0;
 		}
-		return 5;
+
+		var numberInPhrase = parseInt(words[0], 10);
+		if (isNaN(numberInPhrase)) {
+			return 0;
+		}
+
+		var unitString = words[1];
+
+		if (unitString === "seconds" || unitString === "second") {
+			return numberInPhrase;
+		}
+		if (unitString === "minutes" || unitString === "minute") {
+			return numberInPhrase * 60;
+		}
+		if (unitString === "hours" || unitString === "hour") {
+			return numberInPhrase * 60 * 60;
+		}
+		return 0;
+	}
+
+	function isNaN(value) {
+		return value !== value;
 	}
 
 	function beep() {
