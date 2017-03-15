@@ -11,10 +11,15 @@ var Timer = (function() {
 	function startTimer(durationPhrase) {
 		stopTimer();
 
-		self.data.stopped = false;
-		self.data.time = parseTimeInSeconds(durationPhrase);
+		var parsedSeconds = parseTimeInSeconds(durationPhrase);
 
-		setNextTimerTimeout();
+		if (parsedSeconds !== 0) {
+			self.data.stopped = false;
+			self.data.time = parsedSeconds;
+			beep();
+			setNextTimerTimeout();
+		}
+
 	}
 
 	function setNextTimerTimeout() {
