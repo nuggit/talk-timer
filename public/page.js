@@ -10,59 +10,59 @@ String.prototype.toHHMMSS = function () {
     if (seconds < 10) {seconds = "0"+seconds;}
 
     if (hours > 0) {
-	    return hours + ":" + minutes + ":" + seconds;
+      return hours + ":" + minutes + ":" + seconds;
     }
     else {
-	    return minutes + ":" + seconds;
+      return minutes + ":" + seconds;
     }
 }
 
 var timerVm = new Vue({
-	el: '#timerDisplay',
-	data: {
-		timerInfo: Timer.data
-	},
-	computed: {
-		timeLeft: function () {
-			return Timer.data.time.toString().toHHMMSS();
-		},
-		timerStyles: function () {
-			return {
-				started: !Timer.data.stopped,
-				stopped: Timer.data.stopped,
-				beeping: Timer.data.time <= 0 && !Timer.data.stopped,
-				blink: Timer.data.time <= 0 && !Timer.data.stopped,
-				silence: Timer.data.silence
-			};
-		}
-	}
+  el: '#timerDisplay',
+  data: {
+    timerInfo: Timer.data
+  },
+  computed: {
+    timeLeft: function () {
+      return Timer.data.time.toString().toHHMMSS();
+    },
+    timerStyles: function () {
+      return {
+        started: !Timer.data.stopped,
+        stopped: Timer.data.stopped,
+        beeping: Timer.data.time <= 0 && !Timer.data.stopped,
+        blink: Timer.data.time <= 0 && !Timer.data.stopped,
+        silence: Timer.data.silence
+      };
+    }
+  }
 });
 
 if (annyang) {
-	var commands = {
-		'(set) timer (for) *duration': function(duration) {
-			console.log("setting timer for " + duration);
-			Timer.start(duration);
-		},
-		'stop timer': function () {
-			console.log("stopping timer");
-			Timer.stop()
-		},
-		'silence (timer)': function () {
-			console.log("silencing timer");
-			Timer.silence()
-		}
-	};
+  var commands = {
+    '(set) timer (for) *duration': function(duration) {
+      console.log("setting timer for " + duration);
+      Timer.start(duration);
+    },
+    'stop timer': function () {
+      console.log("stopping timer");
+      Timer.stop()
+    },
+    'silence (timer)': function () {
+      console.log("silencing timer");
+      Timer.silence()
+    }
+  };
 
-	annyang.debug();
+  annyang.debug();
 
-	annyang.addCommands(commands);
+  annyang.addCommands(commands);
 
-	annyang.addCallback('error', function(err) {
-		console.log('Annyang error', err);
-	});
+  annyang.addCallback('error', function(err) {
+    console.log('Annyang error', err);
+  });
 
-	annyang.start();
-	console.log("Listening");
+  annyang.start();
+  console.log("Listening");
 }
 
