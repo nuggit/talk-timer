@@ -20,6 +20,9 @@ body {
   }
   &.beeping {
     color: $timesup-color;
+    &:before {
+      content: "-";
+    }
   }
   &.beeping.silenced:after {
     content: '\01F507';

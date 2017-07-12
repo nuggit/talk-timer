@@ -1,6 +1,9 @@
 // http://stackoverflow.com/a/6313008/873550
 String.prototype.toHHMMSS = function () {
     var sec_num = parseInt(this, 10);
+    if(sec_num < 0) {
+      sec_num *= -1;
+    }
     var hours   = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);

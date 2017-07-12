@@ -22,23 +22,13 @@ var Timer = (function() {
   }
 
   function setNextTimerTimeout() {
+    if (self.data.time <= 0 && self.data.silence === false) {
+      beep();
+    }
     self.timeout = setTimeout(function () {
       self.data.time--;
-      if (self.data.time > 0 && self.data.stopped === false) {
+      if (self.data.stopped === false) {
         setNextTimerTimeout();
-      }
-      else if (self.data.time == 0) {
-        setNextBeepTimeout();
-      }
-    }, 1000);
-  }
-
-  function setNextBeepTimeout() {
-    beep();
-    self.timeout = setTimeout(function () {
-      self.data.time--;
-      if (self.data.silence === false && self.data.stopped === false) {
-        setNextBeepTimeout();
       }
     }, 1000);
   }
