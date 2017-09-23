@@ -14,6 +14,22 @@
        v-bind:style="{ visibility: 'visible'}">{{ timeLeft }}</div>
   </div>
 
+  <div class="user-guide">
+    <p>Voice commands:</p>
+    <p>
+      <ul>
+        <li>"Set timer for (time)"
+          <ul>
+            <li>where (time) can be, for example: 10 seconds, 30 minutes, 2 hours</li>
+            <li>it can't handle any other units, and it can't handle any complex times like "2 minutes 30 seconds" nor "half an hour"... yet!</li>
+          </ul>
+        </li>
+        <li>"Stop timer"</li>
+        <li>"Silence"</li>
+      </ul>
+    </p>
+  </div>
+
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="annyang.min.js"></script>
   <script src="timer.js"></script>

@@ -1,9 +1,20 @@
 $inactive-color: #888;
 $active-color: #000;
 $timesup-color: #e00;
+$elusive-text-color: #ddd;
 
 body {
   width: 100%;
+}
+
+.user-guide {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 2vw;
+  color: $elusive-text-color;
+  transition: color 250ms;
+  &:hover {
+    color: $inactive-color;
+  }
 }
 
 .timer {
@@ -27,6 +38,16 @@ body {
   &.beeping.silenced:after {
     content: '\01F507';
     font-size: 8vw;
+  }
+}
+
+@media screen and (max-width: 732px) {
+  .user-guide {
+    font-size: 5vw;
+  }
+  .timer {
+    font-size: 18vw;
+    margin: 5vh 0;
   }
 }
 

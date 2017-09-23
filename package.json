@@ -5,9 +5,6 @@
   "author": "Nagisa Day",
   "repository": "https://github.com/nuggit/talk-timer",
   "license": "BSD",
-  "scripts": {
-    "test": "mocha"
-  },
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp": "~3.9.1",
